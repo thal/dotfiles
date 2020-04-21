@@ -1,0 +1,15 @@
+Dotfiles tracked by a bare git repo, using the method described in news.ycombinator.com/item?id=11070797
+Create the repo:
+	git init --bare $HOME/.dotfiles
+Add the following alias:
+	alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+Then version files using standard git techniques:
+	config add
+	config commit
+	config push
+Multiple machines can be managed with branches and merging
+Config can be applied to a new machine using git clone:
+	git clone --separate-git-dir=$HOME/.dotfiles https://path/to/repo $HOME
+	Note: Requires cloning into empty directory. 
+	
+

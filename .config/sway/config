@@ -61,6 +61,15 @@ for_window [app_id="launcher"] floating enable, border pixel
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# Switch between US and US(intl) layouts with Alt-Space
+# Enable numlock automatically
+input * {
+    xkb_layout "us,us"
+    xkb_variant ",intl"
+    xkb_options "grp:alt_space_toggle
+    xkb_numlock enable
+}
+
 ### Key bindings
 #
 # Basics:

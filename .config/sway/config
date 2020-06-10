@@ -224,6 +224,8 @@ bar {
         background #323232
         inactive_workspace #32323200 #808080 #3c3c3c
     }
+
+    font "Source Sans Semibold 11"
 }
 
 # GTK+ with Wayland does not pick up theme from settings.ini. Set it here instead.
@@ -237,5 +239,7 @@ exec_always {
 hide_edge_borders both
 
 for_window [app_id="firefox"] border pixel 2
+
+font "Source Sans Pro Semibold 11"
 
 include /etc/sway/config.d/*

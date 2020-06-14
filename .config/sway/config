@@ -236,10 +236,14 @@ exec_always {
 #   gsettings set $gnome-schema cursor-theme
 }
 
+smart_borders on
 hide_edge_borders both
 
 for_window [app_id="firefox"] border pixel 2
 
 font "Source Sans Pro Semibold 11"
+
+for_window [class="Steam"] border none
+assign [class="Steam"] workspace 9
 
 include /etc/sway/config.d/*

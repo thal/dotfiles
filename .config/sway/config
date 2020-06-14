@@ -231,10 +231,12 @@ bar {
 # GTK+ with Wayland does not pick up theme from settings.ini. Set it here instead.
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'ClassicLooks Raleigh'
-    gsettings set $gnome-schema icon-theme 'Newaita'
-#   gsettings set $gnome-schema cursor-theme
+    gsettings set $gnome-schema gtk-theme 'TraditionalOk'
+    gsettings set $gnome-schema icon-theme 'Delft-Teal'
+    gsettings set $gnome-schema cursor-theme 'Quintom_Snow'
 }
+
+seat seat0 xcursor_theme 'Quintom_Snow'
 
 smart_borders on
 hide_edge_borders both

@@ -229,7 +229,7 @@ bar {
         inactive_workspace #32323200 #808080 #3c3c3c
     }
 
-    font "IBM Plex Sans 11"
+    font "IBM Plex Sans Semibold 10"
 }
 
 # GTK+ with Wayland does not pick up theme from settings.ini. Set it here instead.
@@ -238,7 +238,7 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Greybird'
     gsettings set $gnome-schema icon-theme 'Delft'
     gsettings set $gnome-schema cursor-theme 'Quintom_Snow'
-    gsettings set $gnome-schema font-name 'IBM Plex Sans 11'
+    gsettings set $gnome-schema font-name 'IBM Plex Sans 10'
 }
 
 seat seat0 xcursor_theme 'Quintom_Snow'
@@ -249,7 +249,7 @@ hide_edge_borders both
 for_window [app_id="firefox"] border pixel 2
 
 # font "Source Sans Pro Semibold 11"
-font "IBM Plex Sans 11"
+font "IBM Plex Sans Semibold 10"
 
 for_window [class="Steam"] border none
 assign [class="Steam"] workspace 9

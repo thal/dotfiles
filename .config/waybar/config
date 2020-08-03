@@ -5,7 +5,7 @@
         // "width": 1280, // Waybar width
         // Choose the order of the modules
         "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-        "modules-right": ["idle_inhibitor", "pulseaudio", "network", "disk", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock", "tray"],
+        "modules-right": ["idle_inhibitor", "pulseaudio", "custom/kb",  "network", "disk", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock", "tray"],
         // Modules configuration
         // "sway/workspaces": {
         //     "disable-scroll": true,
@@ -31,6 +31,11 @@
                 "activated": "",
                 "deactivated": ""
             }
+        },
+        "custom/kb" : {
+            "exec": "swaymsg -t get_inputs | jq -r \".[1].xkb_active_layout_name\"",
+            "format": "{}",
+            "interval": 1
         },
         "tray": {
             // "icon-size": 21,

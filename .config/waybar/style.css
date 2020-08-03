@@ -58,6 +58,7 @@ window#waybar.solo {
 }
 
 #clock,
+#custom-kb,
 #battery,
 #cpu,
 #disk,

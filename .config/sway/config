@@ -101,6 +101,8 @@ input * {
     bindsym $mod+Shift+e exec swaynag -t warning \
         -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
         -z 'Suspend' 'systemctl suspend' \
+        -z 'Shutdown' 'systemctl poweroff' \
+        -z 'Reboot' 'systemctl reboot' \
         -z 'Lock' 'swaylock' \
         -b 'Logout' 'swaymsg exit' \
 
@@ -241,6 +243,7 @@ smart_borders on
 hide_edge_borders both
 
 for_window [app_id="firefox"] border pixel 2
+for_window [title="Firefox - Sharing Indicator"] floating enable
 
 # font "Source Sans Pro Semibold 11"
 font "IBM Plex Sans Semibold 10"
@@ -249,3 +252,5 @@ for_window [class="Steam"] border none
 assign [class="Steam"] workspace 9
 
 include /etc/sway/config.d/*
+
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"

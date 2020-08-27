@@ -3,7 +3,7 @@
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -30,6 +30,8 @@ window#waybar.solo {
 
 #workspaces button {
     padding: 0 ;
+    padding-left: 5;
+    padding-right: 5;
     background-color: transparent;
     color: #ffffff;
     border-bottom: 3px solid transparent;

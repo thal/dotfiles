@@ -1,5 +1,5 @@
 {
-    // "layer": "top", // Waybar at top layer
+    "layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
 //    "height": 20, // Waybar height (to be removed for auto height)
         // "width": 1280, // Waybar width
@@ -33,7 +33,9 @@
             }
         },
         "custom/kb" : {
-            "exec": "swaymsg -t get_inputs | jq -r \".[1].xkb_active_layout_name\"",
+            "on-click": "swaymsg \"input 1479:8210:USB_Keyboard xkb_switch_layout next\"",
+            "exec-on-event": true,
+            "exec": "swaymsg -t get_inputs | jq -r \".[0].xkb_active_layout_name\"",
             "format": "{}",
             "interval": 1
         },

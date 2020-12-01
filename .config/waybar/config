@@ -5,7 +5,18 @@
         // "width": 1280, // Waybar width
         // Choose the order of the modules
         "modules-left": ["sway/workspaces"],
-        "modules-right": ["idle_inhibitor", "pulseaudio", "custom/kb",  "network", "disk", "memory", "temperature", "clock", "tray"],
+        "modules-right": [
+            "idle_inhibitor",
+            "pulseaudio",
+            "custom/kb",
+            "network#ethernet",
+            "network#vpn",
+            "disk",
+            "memory",
+            "temperature",
+            "clock",
+            "tray"
+            ],
         // Modules configuration
         // "sway/workspaces": {
         //     "disable-scroll": true,
@@ -84,12 +95,20 @@
         "battery#bat2": {
             "bat": "BAT2"
         },
-        "network": {
-            // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "network#ethernet": {
+            "interface": "en*", // (Optional) To force the use of this interface
             "format-wifi": "{essid} ({signalStrength}%) ",
             "format-ethernet": " {ipaddr}",
             "format-linked": "{ifname} (No IP) ",
             "format-disconnected": "Disconnected ⚠",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "network#vpn": {
+            "interface": "vpn*", // (Optional) To force the use of this interface
+            "format-wifi": "{essid} ({signalStrength}%) ",
+            "format-ethernet": "VPN:{ipaddr}",
+            "format-linked": "VPN: none",
+            "format-disconnected": "VPN: none",
             "format-alt": "{ifname}: {ipaddr}/{cidr}"
         },
         "pulseaudio": {

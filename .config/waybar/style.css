@@ -65,9 +65,9 @@ window#waybar.solo {
 #cpu,
 #disk,
 #memory,
+#network,
 #temperature,
 #backlight,
-#network,
 #pulseaudio,
 #custom-media,
 #tray,
@@ -128,12 +128,10 @@ label:focus {
     background-color: #90b1b1;
 }
 
-#network {
-/*    background-color: #2980b9; */
-}
-
-#network.disconnected {
-/*    background-color: #f53c3c; */
+/* Turn VPN module red when connected */
+/* "ethernet" class is applied when connected, aka, vpn active */
+#network.vpn.ethernet {
+	background-color: #dd5050;
 }
 
 #pulseaudio {

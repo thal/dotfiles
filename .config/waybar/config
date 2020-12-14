@@ -48,7 +48,8 @@
             "exec-on-event": true,
             "exec": "swaymsg -t get_inputs | jq -r \".[0].xkb_active_layout_name\"",
             "format": "{}",
-            "interval": 1
+            "interval":"once",
+            "signal": 1
         },
         "tray": {
             // "icon-size": 21,
@@ -71,7 +72,7 @@
             "critical-threshold": 80,
             "format-critical": "{icon} {temperatureC}°C",
             "format": "{icon} {temperatureC}°C",
-            "format-icons": ["", "", ""]
+            "format-icons": [ ""]
         },
         "backlight": {
             // "device": "acpi_video1",

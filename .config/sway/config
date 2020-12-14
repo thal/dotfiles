@@ -14,19 +14,20 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty --single-instance
+set $term kitty -1
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu exec $term --class=launcher -1 env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
+set $menu exec $term --class=launcher env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
-for_window [app_id="launcher"] floating enable, border pixel, resize set 600px 400px
+for_window [app_id="launcher"] floating enable, border pixel
+#, resize set 600px 400px
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -49,7 +50,7 @@ for_window [app_id="launcher"] floating enable, border pixel, resize set 600px 4
 
 exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on" && systemctl --user restart gammastep'
+              resume 'swaymsg "output * dpms on"; systemctl --user restart gammastep'
 
 ### Input configuration
 #
@@ -70,9 +71,12 @@ exec swayidle -w \
 input * {
     xkb_layout "us,us"
     xkb_variant ",intl"
-    xkb_options "grp:alt_space_toggle
+    xkb_options "grp:alt_space_toggle"
     xkb_numlock enable
 }
+
+# SIGRTMIN+1 updates custom waybar module for current keyboard layout
+bindsym Mod1+space exec pkill -RTMIN+1 waybar
 
 ### Key bindings
 #

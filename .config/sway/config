@@ -243,8 +243,7 @@ exec_always {
 
 seat seat0 xcursor_theme 'Quintom_Snow'
 
-hide_edge_borders --i3 both
-default_border pixel 2
+default_border pixel 4
 
 for_window [title="Firefox - Sharing Indicator"] floating enable
 
@@ -259,6 +258,12 @@ for_window [app_id="pavucontrol"] floating enable, border pixel, resize set 800p
 # Thunar File Copy dialogs
 for_window [app_id="Thunar" title="File Operation Progress"] floating enable
 
+hide_edge_borders --i3 both
+
 include /etc/sway/config.d/*
+
+#client.focused  #FF0000 #FF0000 #FFFFFF
+client.unfocused        #666666 #555555 #888888
+client.focused_inactive #333333 #43515b #aaaaaa
 
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"

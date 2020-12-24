@@ -4,7 +4,6 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: sans-serif;
     font-size: 14px;
-    min-height: 0;
 }
 
 window#waybar {
@@ -75,8 +74,8 @@ window#waybar.solo {
 #idle_inhibitor,
 #mpd {
     background-color: #64727D;
-    padding: 0 10px;
-    margin: 0 4px;
+    padding: 5px 12px;
+    margin-left: 8px;
     color: #ffffff;
 }
 

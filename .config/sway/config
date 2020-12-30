@@ -250,6 +250,7 @@ for_window [title="Firefox - Sharing Indicator"] floating enable
 font "IBM Plex Sans Semibold 10"
 
 for_window [class="Steam"] border none
+for_window [class="Steam" title="Friends List"] resize set width 520px
 assign [class="Steam"] workspace 9
 
 # Always start Pulseaudio Volume Control floating

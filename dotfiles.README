@@ -12,4 +12,13 @@ Config can be applied to a new machine using git clone:
 	git clone --separate-git-dir=$HOME/.dotfiles https://path/to/repo $HOME
 	Note: Requires cloning into empty directory. 
 	
-
+Includes configuration for the following packages:
+    * bash
+    * fontconfig
+    * gammastep
+    * kitty
+    * mako
+    * nvim
+    * qt5ct
+    * sway
+    * waybar

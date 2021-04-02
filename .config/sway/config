@@ -21,12 +21,21 @@ set $term kitty -1
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu exec $term --class=launcher env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
+for_window [app_id="launcher"] floating enable, border pixel
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-for_window [app_id="launcher"] floating enable, border pixel
+output * max_render_time 8
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+# bindswitch is edge-triggered. Display will not be enabled/disabled correctly
+# when restarting sway. The following script fixes that.
+exec_always bash -c "if cat /proc/acpi/button/lid/LID/state | grep -q open; then swaymsg output $laptop enable; else swaymsg output $laptop disable; fi"
+
 #, resize set 600px 400px
 # Example configuration:
 #
@@ -48,10 +57,18 @@ for_window [app_id="launcher"] floating enable, border pixel
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+# timeout 1200 'swaylock -f -c 000000' \
+#
 exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"; systemctl --user restart gammastep'
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
 
+input "2:10:TPPS/2_IBM_TrackPoint"
+{
+    pointer_accel 1
+    accel_profile flat
+}
 ### Input configuration
 #
 # Example configuration:
@@ -224,6 +241,12 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 #
 # Status Bar:
 #
@@ -238,16 +261,18 @@ exec_always {
     gsettings set $gnome-schema gtk-theme 'Greybird'
     gsettings set $gnome-schema icon-theme 'Delft'
     gsettings set $gnome-schema cursor-theme 'Quintom_Snow'
-    gsettings set $gnome-schema font-name 'IBM Plex Sans 10'
+    gsettings set $gnome-schema font-name 'IBM Plex Sans Semibold 10'
+    gsettings set $gnome-schema text-scaling-factor 1.5
+    gsettings set $gnome-schema cursor-size 32
 }
 
-seat seat0 xcursor_theme 'Quintom_Snow'
+seat seat0 xcursor_theme 'Quintom_Snow' '32'
 
 default_border pixel 4
 
 for_window [title="Firefox - Sharing Indicator"] floating enable
 
-font "IBM Plex Sans Semibold 10"
+font "IBM Plex Sans Semibold 12"
 
 for_window [class="Steam"] border none
 for_window [class="Steam" title="Friends List"] resize set width 520px

@@ -9,11 +9,12 @@
             "idle_inhibitor",
             "pulseaudio",
             "custom/kb",
-            "network#ethernet",
-            "network#vpn",
+            "network#wifi",
             "disk",
             "memory",
             "temperature",
+            "battery#0",
+            "battery#1",
             "clock",
             "tray"
             ],
@@ -44,9 +45,9 @@
             }
         },
         "custom/kb" : {
-            "on-click": "swaymsg \"input 1479:8210:USB_Keyboard xkb_switch_layout next\"",
+            "on-click": "swaymsg \"input 1:1:AT_Translated_Set_2_keyboard xkb_switch_layout next\"",
             "exec-on-event": true,
-            "exec": "swaymsg -t get_inputs | jq -r \".[0].xkb_active_layout_name\"",
+            "exec": "getkblayout.sh",
             "format": "{}",
             "interval":"once",
             "signal": 1
@@ -79,12 +80,14 @@
             "format": "{percent}% {icon}",
             "format-icons": ["", ""]
         },
-        "battery": {
+        "battery#0": {
+            "bat":"BAT0",
             "states": {
                 // "good": 95,
                 "warning": 30,
-                "critical": 15
+                "critical": 10
             },
+            "full-at": 80,
             "format": "{capacity}% {icon}",
             "format-charging": "{capacity}% ",
             "format-plugged": "{capacity}% ",
@@ -93,11 +96,32 @@
             // "format-full": "",
             "format-icons": ["", "", "", "", ""]
         },
-        "battery#bat2": {
-            "bat": "BAT2"
+        "battery#1": {
+            "bat": "BAT1",
+            "states": {
+                // "good": 95,
+                "warning": 30,
+                "critical": 10
+            },
+            "full-at": 80,
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}% ",
+            "format-plugged": "{capacity}% ",
+            "format-alt": "{time} {icon}",
+            // "format-good": "", // An empty format will hide the module
+            // "format-full": "",
+            "format-icons": ["", "", "", "", ""]
         },
         "network#ethernet": {
             "interface": "en*", // (Optional) To force the use of this interface
+            "format-wifi": "{essid} ({signalStrength}%) ",
+            "format-ethernet": " {ipaddr}",
+            "format-linked": "{ifname} (No IP) ",
+            "format-disconnected": "Disconnected ⚠",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "network#wifi": {
+            "interface": "wlan*", // (Optional) To force the use of this interface
             "format-wifi": "{essid} ({signalStrength}%) ",
             "format-ethernet": " {ipaddr}",
             "format-linked": "{ifname} (No IP) ",
@@ -116,8 +140,8 @@
             // "scroll-step": 1, // %, can be a float
             "format": "{icon} {volume}% {format_source} ",
             "format-bluetooth": "{volume}% {icon} {format_source}",
-            "format-bluetooth-muted": " {icon} {format_source}",
-            "format-muted": " {format_source}",
+            "format-bluetooth-muted": " {icon} {format_source}",
+            "format-muted": " {format_source}",
             "format-source": " {volume}%",
             "format-source-muted": "",
             "format-icons": {

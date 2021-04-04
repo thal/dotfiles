@@ -1,0 +1,7 @@
+[Unit]
+Description=Prune nonexistent entries from sway-launcher-desktop history
+[Service]
+Type=oneshot
+ExecStart=/home/tom/.local/bin/prune-sld-history.sh
+[Install]
+WantedBy=sway-session.target

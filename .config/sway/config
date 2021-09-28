@@ -21,13 +21,13 @@ set $term kitty -1
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu exec $term --class=launcher env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
 
-for_window [app_id="launcher"] floating enable, border pixel
+for_window [app_id="launcher"] floating enable, border pixel, resize set 600px 400px
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * max_render_time 8
+output * max_render_time off
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
@@ -62,12 +62,19 @@ exec_always bash -c "if cat /proc/acpi/button/lid/LID/state | grep -q open; then
 exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock -f -c 000000 --indicator-idle-visible'
 
 input "2:10:TPPS/2_IBM_TrackPoint"
 {
     pointer_accel 1
     accel_profile flat
+}
+
+input "2:7:SynPS/2_Synaptics_TouchPad"
+{
+    pointer_accel -0.25
+    accel_profile adaptive
+    scroll_factor 0.4
 }
 ### Input configuration
 #
@@ -91,6 +98,10 @@ input * {
     xkb_options "grp:alt_space_toggle"
     xkb_numlock enable
 }
+
+# Bind grimshot to PrtSc
+bindsym Print             exec grimshot --notify save screen
+bindsym Ctrl+Print        exec grimshot --notify save active
 
 # SIGRTMIN+1 updates custom waybar module for current keyboard layout
 bindsym Mod1+space exec pkill -RTMIN+1 waybar
@@ -124,7 +135,7 @@ bindsym Mod1+space exec pkill -RTMIN+1 waybar
         -z 'Suspend' 'systemctl suspend' \
         -z 'Shutdown' 'systemctl poweroff' \
         -z 'Reboot' 'systemctl reboot' \
-        -z 'Lock' 'swaylock' \
+        -z 'Lock' 'swaylock -f -c 000000 --indicator-idle-visible' \
         -B 'Logout' 'systemctl --user stop sway-session.target; swaymsg exit' \
 
 #
@@ -262,7 +273,7 @@ exec_always {
     gsettings set $gnome-schema icon-theme 'Delft'
     gsettings set $gnome-schema cursor-theme 'Quintom_Snow'
     gsettings set $gnome-schema font-name 'IBM Plex Sans Semibold 10'
-    gsettings set $gnome-schema text-scaling-factor 1.5
+    gsettings set $gnome-schema text-scaling-factor 1.25
     gsettings set $gnome-schema cursor-size 32
 }
 
@@ -270,7 +281,7 @@ seat seat0 xcursor_theme 'Quintom_Snow' '32'
 
 default_border pixel 4
 
-for_window [title="Firefox - Sharing Indicator"] floating enable
+for_window [title="Firefox.*Sharing Indicator"] floating enable
 
 font "IBM Plex Sans Semibold 12"
 
@@ -282,7 +293,7 @@ assign [class="Steam"] workspace 9
 for_window [app_id="pavucontrol"] floating enable, border pixel, resize set 800px 600px
 
 # Thunar File Copy dialogs
-for_window [app_id="Thunar" title="File Operation Progress"] floating enable
+for_window [app_id="thunar" title="File Operation Progress"] floating enable
 
 hide_edge_borders --i3 both
 

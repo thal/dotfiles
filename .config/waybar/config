@@ -9,6 +9,7 @@
             "idle_inhibitor",
             "pulseaudio",
             "custom/kb",
+            "network#ethernet",
             "network#wifi",
             "disk",
             "memory",
@@ -117,7 +118,7 @@
             "format-wifi": "{essid} ({signalStrength}%) ",
             "format-ethernet": " {ipaddr}",
             "format-linked": "{ifname} (No IP) ",
-            "format-disconnected": "Disconnected ⚠",
+            "format-disconnected": "",
             "format-alt": "{ifname}: {ipaddr}/{cidr}"
         },
         "network#wifi": {
@@ -125,7 +126,7 @@
             "format-wifi": "{essid} ({signalStrength}%) ",
             "format-ethernet": " {ipaddr}",
             "format-linked": "{ifname} (No IP) ",
-            "format-disconnected": "Disconnected ⚠",
+            "format-disconnected": "",
             "format-alt": "{ifname}: {ipaddr}/{cidr}"
         },
         "network#vpn": {

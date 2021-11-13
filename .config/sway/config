@@ -304,4 +304,5 @@ include /etc/sway/config.d/*
 client.unfocused        #666666 #555555 #888888
 client.focused_inactive #333333 #43515b #aaaaaa
 
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+exec "systemctl --user start sway-session.target"

@@ -127,4 +127,7 @@
 
 /*** End of: Megabar Styler General ***/
 
-
+/* Remove 1px padding from top of menu bar */
+toolbar[type="menubar"] {
+    padding-top: 0px !important;
+}

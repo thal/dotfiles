@@ -8,7 +8,6 @@
         "modules-right": [
             "idle_inhibitor",
             "pulseaudio",
-            "custom/kb",
             "network#ethernet",
             "network#wifi",
             "disk",
@@ -16,6 +15,7 @@
             "temperature",
             "battery#0",
             "battery#1",
+            "sway/language",
             "clock",
             "tray"
             ],
@@ -52,6 +52,13 @@
             "format": "{}",
             "interval":"once",
             "signal": 1
+        },
+        "sway/language" : {
+            "format": "{}",
+            "tooltip-format": "{long}",
+            // Relies on the built-in laptop keyboard always being present.
+            // See https://github.com/swaywm/sway/issues/6011
+            "on-click": "swaymsg input 1:1:AT_Translated_Set_2_keyboard xkb_switch_layout next"
         },
         "tray": {
             // "icon-size": 21,

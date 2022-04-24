@@ -60,6 +60,7 @@ window#waybar.solo {
 
 #clock,
 #custom-kb,
+#language,
 #battery,
 #cpu,
 #disk,
@@ -77,6 +78,11 @@ window#waybar.solo {
     padding: 5px 12px;
     margin-left: 8px;
     color: #ffffff;
+}
+
+/* language seems to be the only module whose width does not expand automatically. Why????*/
+#language{
+    min-width: 30px;
 }
 
 #clock {

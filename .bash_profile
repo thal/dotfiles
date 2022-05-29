@@ -9,8 +9,9 @@ if [[ "$(tty)" == "/dev/tty1" ]]; then
     export MOZ_ENABLE_WAYLAND=1
     export GTK_OVERLAY_SCROLLING=0
     export QT_QPA_PLATFORMTHEME=qt5ct
+    export GTK_THEME=Greybird
     # Start gkd for ssh and export SSH_AUTH_SOCK
     export $(gnome-keyring-daemon --start --components=ssh)
     # Redirect stdout to the systemd journal
-    exec systemd-cat -t sway $HOME/sway/build/sway/sway
+#    exec systemd-cat -t sway $HOME/sway/build/sway/sway
 fi

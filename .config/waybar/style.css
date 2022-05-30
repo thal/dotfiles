@@ -75,14 +75,15 @@ window#waybar.solo {
 #idle_inhibitor,
 #mpd {
     background-color: #64727D;
-    padding: 5px 12px;
-    margin-left: 8px;
+    padding: 4px 8px;
+    margin-left: 4px;
     color: #ffffff;
 }
 
 /* language seems to be the only module whose width does not expand automatically. Why????*/
 #language{
     min-width: 30px;
+    font-variant: small-caps;
 }
 
 #clock {
@@ -140,8 +141,8 @@ label:focus {
 }
 
 #pulseaudio.muted {
-/*    background-color: #90b1b1; */
-    color: #2a5c45;
+    /*color: #821b1b; */
+    background-color: #eb4d4b;
 }
 
 #custom-media {

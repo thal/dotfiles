@@ -29,8 +29,9 @@ window#waybar.solo {
 
 #workspaces button {
     padding: 0 ;
-    padding-left: 5px;
-    padding-right: 5px;
+    min-width: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: transparent;
     color: #ffffff;
     border-bottom: 3px solid transparent;
@@ -82,8 +83,8 @@ window#waybar.solo {
 
 /* language seems to be the only module whose width does not expand automatically. Why????*/
 #language{
-    min-width: 30px;
-    font-variant: small-caps;
+    /*min-width: 30px; */
+    /*font-variant: small-caps; */
 }
 
 #clock {

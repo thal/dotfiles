@@ -54,7 +54,7 @@
             "signal": 1
         },
         "sway/language" : {
-            "format": "{}",
+            "format": "{short}",
             "tooltip-format": "{long}",
             // Relies on the built-in laptop keyboard always being present.
             // See https://github.com/swaywm/sway/issues/6011
@@ -165,7 +165,7 @@
             "tooltip-format": "{desc}\n{icon} {volume}% {format_source}",
             "format-bluetooth": "{volume}% {icon} ",
             "format-bluetooth-muted": " {icon}",
-            "format-muted": " {volume}%",
+            "format-muted": "",
             "format-source": " {volume}%",
             "format-source-muted": "",
             "format-icons": {

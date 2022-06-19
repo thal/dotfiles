@@ -20,6 +20,12 @@ set splitbelow
 set background=dark
 set ignorecase
 set smartcase
+set title
+set list
+set nowrap
+set sidescroll=5
+set listchars+=precedes:<,extends:>
+set completeopt-=preview
 
 " Make the Quickfix window more usable
 noremap <C-n> :cn<CR>
@@ -32,6 +38,22 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 " noremap <C-w> <C-w>q
+
+" Use same navigation commands in terminal windows
+" (means terminal won't receive Ctrl-HJKL, but oh well)
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+
+" Disable line numbers in terminal windows
+au TermOpen * setlocal nonumber
+" Keep terminal windows in insert mode by default
+au TermOpen,WinEnter term://* startinsert
+" Esc in terminal to go to normal mode
+tnoremap <Esc> <C-\><C-n>
+
+autocmd Bufenter * if &buftype == 'terminal' | set nonumber | endif
 
 " Make
 map <F9> :make<CR>

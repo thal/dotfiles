@@ -1,4 +1,8 @@
 -- LSP config. Adapted from github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
 local nvim_lsp = require('lspconfig')
 local on_attach = function(_, bufnr)
     local opts = { buffer = bufnr }

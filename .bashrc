@@ -20,7 +20,9 @@ fi
 # SETTITLE is unset before kitty's PROMPT_COMMANDs run, 1 after
 # bashrc is normally sourced before kitty's shell integration script
 # So have to do "manual shell integration" and modify PROMPT_COMMAND thereafter
-PROMPT_COMMAND="builtin unset SETTITLE; ${PROMPT_COMMAND}; SETTITLE=1"
+if [ -n "$PROMPT_COMMAND" ]; then
+    PROMPT_COMMAND="builtin unset SETTITLE; ${PROMPT_COMMAND}; SETTITLE=1"
+fi
 
 # Set window title to current command
 # DEBUG signal is sent before every command is executed

@@ -1,4 +1,6 @@
 /* Scrollbar width fixes */
+
+/*
 scrollbar.vertical slider,
 scrollbar.slider.vertical
 {
@@ -9,6 +11,7 @@ scrollbar.slider.horizontal
 {
     min-height: 0.5em;
 }
+*/
 
 /* Steppers */
 * {

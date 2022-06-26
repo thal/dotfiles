@@ -33,7 +33,7 @@ user_pref("ui.themedScrollbarInactive", "#00000000");
 user_pref("ui.themedScrollbarThumbInactive", "#969696");
 
 // No tab previews when dragging
-user_pref("nglayout.enable_drag_images", false");
+user_pref("nglayout.enable_drag_images", false);
 
 // Remove all recommendations from new tab page
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);

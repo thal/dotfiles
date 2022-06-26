@@ -1,0 +1,7 @@
+[Unit]
+Description=Dynamic Workspace Names for Sway
+[Service]
+ExecStart=/home/tom/.local/bin/wsdnames.py
+Restart=on-failure
+[Install]
+WantedBy=sway-session.target

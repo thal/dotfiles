@@ -40,6 +40,7 @@ nnoremap <C-p> <Cmd>cp<CR>
 " noremap <C-q> <Cmd>ccl<CR>
 
 noremap <C-_> <Cmd>noh<CR>
+
 " Make splits more usable
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -64,18 +65,6 @@ tnoremap <Esc> <C-\><C-n>
 
 " TODO: look into termdebug plugin
 
-" augroup nerdtree
-"     autocmd!
-"     " Autostart NERDTree if vim is started with no arguments
-"     autocmd VimEnter * if argc() == 0 | NERDTree | endif
-"     " Switch to editor window after starting NERDTree
-"     autocmd VimEnter * wincmd p
-"     " Automatically find opened files in nerdtree
-"     "autocmd BufEnter,BufNew * if &buftype == '' | NERDTreeFind | endif
-" augroup END
-
-" autocmd Bufenter * if &buftype == 'terminal' | set nonumber | endif
-
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
 
@@ -90,21 +79,23 @@ noremap<C-f> :Files<CR>
 noremap<C-g> :Ag<CR>
 let g:fzf_vim.listproc_ag = { list -> fzf#vim#listproc#quickfix(list) }
 let g:fzf_vim.listproc_files = { list -> fzf#vim#listproc#quickfix(list) }
+
 "" Disable Ex mode
 noremap Q <Nop>
 
 noremap <F12> :echo luaeval("require'nvim-treesitter'.statusline()")<CR>
-
-if has('nvim')
-    let $GIT_EDITOR='nvr -cc split --remote-wait'
-endif
-autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
 " Open terminal with ,T
 noremap <leader>T :botright terminal<CR>
 
 " ,, for omnifunc completion
 inoremap <leader>, <c-x><c-o>
+let $EDITOR='nvr -cc split --nostart  --remote-wait +"set bufhidden=delete"'
+
+" Open terminal with ,T
+noremap <leader>T :split<CR><C-w>J10<C-w>_:terminal<CR>
+
+highlight NormalFloat ctermbg=234
 
 lua <<EOF
 

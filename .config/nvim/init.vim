@@ -1,11 +1,11 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'mhinz/vim-grepper'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-treesitter/nvim-treesitter',{'do': ':TSUpdate'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
-"TODO: Adapt all this to lua
 command W wall
 
 " Some sensible defaults
@@ -20,24 +20,33 @@ set splitbelow
 set background=dark
 set ignorecase
 set smartcase
-set title
 set list
 set nowrap
 set sidescroll=5
 set listchars+=precedes:<,extends:>
 set completeopt-=preview
 
-" Make the Quickfix window more usable
-noremap <C-n> :cn<CR>
-noremap <C-m> :cp<CR>
-noremap <C-q> :ccl<CR>
+colorscheme evening
+highlight NonText guibg=None
+highlight EndOfBuffer guibg=None
+highlight Normal guibg=None
 
+" Make the Quickfix window more usable
+" Next result
+nnoremap <C-n> <Cmd>cn<CR>
+" Previous result
+nnoremap <C-p> <Cmd>cp<CR>
+" Close quickfix
+" noremap <C-q> <Cmd>ccl<CR>
+
+noremap <C-_> <Cmd>noh<CR>
 " Make splits more usable
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-" noremap <C-w> <C-w>q
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-t> <C-w>t
+set noequalalways
 
 " Use same navigation commands in terminal windows
 " (means terminal won't receive Ctrl-HJKL, but oh well)
@@ -53,43 +62,70 @@ au TermOpen,WinEnter term://* startinsert
 " Esc in terminal to go to normal mode
 tnoremap <Esc> <C-\><C-n>
 
-autocmd Bufenter * if &buftype == 'terminal' | set nonumber | endif
+" TODO: look into termdebug plugin
 
-" Make
-map <F9> :make<CR>
+" augroup nerdtree
+"     autocmd!
+"     " Autostart NERDTree if vim is started with no arguments
+"     autocmd VimEnter * if argc() == 0 | NERDTree | endif
+"     " Switch to editor window after starting NERDTree
+"     autocmd VimEnter * wincmd p
+"     " Automatically find opened files in nerdtree
+"     "autocmd BufEnter,BufNew * if &buftype == '' | NERDTreeFind | endif
+" augroup END
 
-augroup nerdtree
-    autocmd!
-    " Autostart NERDTree if vim is started with no arguments
-    autocmd VimEnter * if argc() == 0 | NERDTree | endif
-    " Switch to editor window after starting NERDTree
-    autocmd VimEnter * wincmd p
-augroup END
+" autocmd Bufenter * if &buftype == 'terminal' | set nonumber | endif
 
 let NERDTreeShowHidden=1
 let NERDTreeChDirMode=2
 
+set title
+
 let mapleader = ","
-" ,g: Search for a string
-noremap <leader>g :Grepper -tool ag<CR>
-" ,G: Search for a filename
-noremap <leader>G :Grepper -tool ag -grepprg ag --vimgrep -g<CR>
-" ,k: Search for the word under the cursor
-noremap <leader>k :Grepper -tool ag -cword -noprompt<CR>
 
-lua << EOF
--- Plugin-specific config broken out into separate lua files
-local init2 = require('lspconfig-init')
+" Commands from fzf.vim
+let g:fzf_vim = {}
+noremap<C-b> :Buffers<CR>
+noremap<C-f> :Files<CR>
+noremap<C-g> :Ag<CR>
+let g:fzf_vim.listproc_ag = { list -> fzf#vim#listproc#quickfix(list) }
+let g:fzf_vim.listproc_files = { list -> fzf#vim#listproc#quickfix(list) }
+"" Disable Ex mode
+noremap Q <Nop>
 
+noremap <F12> :echo luaeval("require'nvim-treesitter'.statusline()")<CR>
 
--- Tree Sitter
+if has('nvim')
+    let $GIT_EDITOR='nvr -cc split --remote-wait'
+endif
+autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+
+" Open terminal with ,T
+noremap <leader>T :botright terminal<CR>
+
+" ,, for omnifunc completion
+inoremap <leader>, <c-x><c-o>
+
+lua <<EOF
+
+local lspconfiginit = require('lspconfig-init')
+
 require'nvim-treesitter.configs'.setup {
---  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = {}, -- List of parsers to ignore installing
   highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { },  -- list of language that will be disabled
+    enable = true,
+    --disable = { "c","cpp" },
+    disable = {},
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      -- ["foo.bar"] = "Identifier",
+    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
   },
 }
 
+vim.lsp.set_log_level("off")
 EOF

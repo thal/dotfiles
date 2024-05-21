@@ -64,13 +64,20 @@ exec swayidle -w \
               resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000 --indicator-idle-visible'
 
-input "2:10:TPPS/2_IBM_TrackPoint"
+input "1133:49294:Logitech_MX518_Gaming_Mouse"
 {
-    pointer_accel 1
+    pointer_accel -0.2
+    accel_profile adaptive
+}
+
+input "2:10:TPPS/2_Elan_TrackPoint"
+{
+    pointer_accel -0.2
+    scroll_factor 0.3
     accel_profile flat
 }
 
-input "2:7:SynPS/2_Synaptics_TouchPad"
+input "1267:12693:ELAN0676:00_04F3:3195_Touchpad"
 {
     pointer_accel -0.2
     accel_profile adaptive

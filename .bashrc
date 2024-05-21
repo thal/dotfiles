@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='\[\033[34m\][\[\033[0m\]\[\033[32m\]\u@\h \[\033[34m\]\w\]]\033[0m\]\$ '
+PS1='\[\033[01;34m\][\[\033[0m\]\[\033[32m\]\u@\h \[\033[01;34m\]\w]\[\033[0m\]\$ '
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
@@ -16,12 +16,16 @@ PATH=$PATH:$HOME/bin:$HOME/.local/bin
 # [0] is set by /etc/bash.bashrc, and sets the window title to user@host:pwd
 # Sourcing kitty shell integration will append another function
 # Wrap existing PROMPT_COMMAND in a unset/set of SETTITLE, which is checked in the debug trap (see below)
-PROMPT_COMMAND=([0]="builtin unset SETTITLE" [1]=${PROMPT_COMMAND[0]})
+PROMPT_COMMAND=([0]="builtin unset SETTITLE" "${PROMPT_COMMAND[@]}")
 if test -n "$KITTY_INSTALLATION_DIR"; then
-    export KITTY_SHELL_INTEGRATION="no-title"
+    export KITTY_SHELL_INTEGRATION="no-title no-sudo"
     source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
 fi
 PROMPT_COMMAND+=("SETTITLE=1")
+
+# Enable fzf in shell
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 
 # Set window title to current command
 # DEBUG signal is sent before every command is executed

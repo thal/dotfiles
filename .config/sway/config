@@ -18,16 +18,17 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu exec $term --class=launcher env TERMINAL_COMMAND='$term -e' /usr/bin/sway-launcher-desktop
+set $menu exec wofi -i --show drun
 
 for_window [app_id="launcher"] floating enable, border pixel, resize set 600px 400px
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * max_render_time off
+output * bg ~/Pictures/wallpapers/V13.LBM fill
+#output * max_render_time off
+# Headless output should be kept disabled until needed
+output HEADLESS-1 disable
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
@@ -36,6 +37,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 # when restarting sway. The following script fixes that.
 exec_always bash -c "if cat /proc/acpi/button/lid/LID/state | grep -q open; then swaymsg output $laptop enable; else swaymsg output $laptop disable; fi"
 
+output $laptop position 0,0 scale 1.5
 #, resize set 600px 400px
 # Example configuration:
 #
@@ -138,14 +140,13 @@ bindsym Mod1+space exec pkill -RTMIN+1 waybar
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning \
+    bindsym $mod+Shift+e exec swaynag -t warning  -f 'IBM Plex Sans Semibold 10' \
         -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
         -z 'Suspend' 'systemctl suspend' \
         -z 'Shutdown' 'systemctl poweroff' \
         -z 'Reboot' 'systemctl reboot' \
         -z 'Lock' 'swaylock -f -c 000000 --indicator-idle-visible' \
-        -B 'Logout' 'systemctl --user stop sway-session.target; swaymsg exit' \
-
+        -B 'Exit Sway' 'systemctl --user stop sway-session.target; swaymsg exit' \
 #
 # Moving around:
 #

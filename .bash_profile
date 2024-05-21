@@ -1,6 +1,7 @@
 source ~/.bashrc
 # Only continue if this is an interactive shell
 [[ $- != *i* ]] && return
+export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/gcr/ssh
 # Automatically start sway when logging in on tty1
 if [[ "$(tty)" == "/dev/tty1" ]]; then
     # Set graphical-relevant envrionment variables here
@@ -10,7 +11,6 @@ if [[ "$(tty)" == "/dev/tty1" ]]; then
     export GTK_OVERLAY_SCROLLING=0
     export QT_QPA_PLATFORMTHEME=qt5ct
     export GTK_THEME=Greybird
-    export $(gnome-keyring-daemon --start --components=ssh 2>/dev/null)
     # Redirect stdout to the systemd journal
 #    exec systemd-cat -t sway $HOME/sway/build/sway/sway
 fi

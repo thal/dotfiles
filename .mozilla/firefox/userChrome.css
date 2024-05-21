@@ -66,9 +66,9 @@
 }*/
 
 /*** Top "Blue Bar" Display ***/
-.urlbarView-row:first-of-type {
+/*.urlbarView-row:first-of-type {
 	display: var(--mbarstyler-top-bar-display) !important;
-}
+}*/
 
 /*** Font Sizes and Scrolling ***/
 

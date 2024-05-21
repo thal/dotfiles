@@ -31,6 +31,8 @@ user_pref("ui.themedScrollbar", "#00000000");
 user_pref("ui.themedScrollbarInactive", "#00000000");
 // Inactive scrollbar a bit too light with default gtk theme. Make it a bit darker.
 user_pref("ui.themedScrollbarThumbInactive", "#969696");
+// No thin scrollbars
+user_pref("layout.css.scrollbar-width-thin.disabled", true);
 
 // No tab previews when dragging
 user_pref("nglayout.enable_drag_images", false);
@@ -62,3 +64,8 @@ user_pref("browser.urlbar.suggest.quicksuggest", false);
 user_pref("browser.urlbar.suggest.quicksuggest.sponsored", false);
 // Don't show the "Firefox Suggest" label, since there's only one group
 user_pref("browser.urlbar.groupLabels.enabled", false);
+
+// Enable VA-API hardware acceleration
+user_pref("media.ffmpeg.vaapi.enabled", true);
+
+

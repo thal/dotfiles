@@ -333,5 +333,6 @@ hide_edge_borders --i3 both
 client.unfocused        #666666 #555555 #888888
 client.focused_inactive #333333 #43515b #aaaaaa
 
-exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
+# 50-systemd-user.conf imports environment variables for systemd user services and dbus activation environment
+include /etc/sway/config.d/*
 exec "systemctl --user start sway-session.target"

@@ -288,34 +288,45 @@ bar {
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Greybird'
-    gsettings set $gnome-schema icon-theme 'Delft'
-    gsettings set $gnome-schema cursor-theme 'Quintom_Snow'
+    gsettings set $gnome-schema icon-theme 'elementary'
+    gsettings set $gnome-schema cursor-theme 'Simp1e'
     gsettings set $gnome-schema font-name 'IBM Plex Sans Semibold 10'
-    gsettings set $gnome-schema text-scaling-factor 1.25
+    gsettings set $gnome-schema font-antialiasing "rgba"
+    gsettings set $gnome-schema text-scaling-factor 1
     gsettings set $gnome-schema cursor-size 24
 }
 
-seat seat0 xcursor_theme 'Quintom_Snow' '24'
+seat seat0 xcursor_theme 'Simp1e' '24'
 
 default_border pixel 4
 
 for_window [title="Firefox.*Sharing Indicator"] floating enable
 
-font "IBM Plex Sans Semibold 12"
+font "IBM Plex Sans Semibold 10"
 
-for_window [class="Steam"] border none
-for_window [class="Steam" title="Friends List"] resize set width 520px
-assign [class="Steam"] workspace number 9
+for_window [class="[Ss]team"] border none
+for_window [class="[Ss]team" title="Friends List"] resize set width 520px
+assign [class="[Ss]team"] workspace number 9
+assign [instance="[Ss]team"] workspace number 9
+assign [app_id="zenity" title="Steam setup"] workspace number 9
+assign [floating title="[Ss]team"] workspace number 9
 
 # Always start Pulseaudio Volume Control floating
 for_window [app_id="pavucontrol"] floating enable, border pixel, resize set 800px 600px
 
 # Thunar File Copy dialogs
-for_window [app_id="thunar" title="File Operation Progress"] floating enable
+for_window [app_id="[Tt]hunar" title="File Operation Progress"] floating enable
+for_window [app_id="[Tt]hunar" title="Confirm to replace files"] floating enable
+for_window [app_id="org.gnome.Calculator"] floating enable
+
+# Windows from e.g. matplotlib
+for_window [app_id="python3"] floating enable
+
+for_window [app_id="wdisplays"] floating enable
+
+for_window [app_id="file-roller"] floating enable
 
 hide_edge_borders --i3 both
-
-include /etc/sway/config.d/*
 
 #client.focused  #FF0000 #FF0000 #FFFFFF
 client.unfocused        #666666 #555555 #888888

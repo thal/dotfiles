@@ -1,0 +1,152 @@
+{
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+            }
+        },
+    "custom/kb" : {
+        "on-click": "swaymsg \"input 1:1:AT_Translated_Set_2_keyboard xkb_switch_layout next\"",
+        "exec-on-event": true,
+        "exec": "getkblayout.sh",
+        "format": "{}",
+        "interval":"once",
+        "signal": 1
+    },
+    "sway/language" : {
+        "format": "{short}",
+        "tooltip-format": "{long}",
+        // Relies on the built-in laptop keyboard always being present.
+        // See https://github.com/swaywm/sway/issues/6011
+        "on-click": "swaymsg input 1:1:AT_Translated_Set_2_keyboard xkb_switch_layout next"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+           "tooltip-format": "<tt>{calendar}</tt>",
+            "format": "{:%Y-%m-%d %H:%M}"
+        },
+        "disk": {
+            "format": "",
+            "tooltip-format": "{used} / {total} on {path} ({free} free)",
+            "format-alt": " {percentage_used}%"
+        },
+        "memory": {
+            "states": {
+                "high": 90
+            },
+            "format": "",
+            "tooltip-format": "{used:0.1f}GiB / {total:0.1f}GiB RAM\n{swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB Swap",
+            "format-alt": " {percentage}%"
+        },
+        "temperature": {
+            // "thermal-zone": 2,
+            // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+            "critical-threshold": 80,
+            "format-critical": "{icon} {temperatureC}°C",
+            "format": "{icon}",
+            "format-icons": [ ""],
+            "tooltip-format": "{temperatureC}°C",
+            "format-alt": " {temperatureC}°C"
+        },
+        "backlight": {
+            // "device": "acpi_video1",
+            "format": "{percent}% {icon}",
+            "format-icons": ["", ""]
+        },
+        "battery#0": {
+            "bat":"BAT0",
+            "states": {
+                "critical": 5
+            },
+            "full-at": 99,
+            "format": "{icon}",
+            "format-charging": "",
+            "format-plugged": "",
+            "format-alt": "{icon} {capacity}%",
+            "tooltip-format-charging": "{capacity}%, Charging",
+            "tooltip-format-plugged": "{capacity}%, Plugged In",
+            "tooltip-format-full": "{capacity}%, Full",
+            "tooltip-format-not-charging": "{capacity}%, Not Charging",
+            "format-icons": ["", "", "", "", ""]
+        },
+        "battery#1": {
+            "bat": "BAT1",
+            "states": {
+                // "good": 95,
+                "warning": 30,
+                "critical": 10
+            },
+            "full-at": 80,
+            "format": "{icon}",
+            "format-charging": "",
+            "format-plugged": "",
+            "format-alt": "{icon} {capacity}%",
+            "tooltip-format-charging": "{capacity}%, Charging",
+            "tooltip-format-plugged": "{capacity}%, Plugged In",
+            "tooltip-format-full": "{capacity}%, Full",
+            "tooltip-format-not-charging": "{capacity}%, Not Charging",
+            "format-icons": ["", "", "", "", ""]
+        },
+        "network#ethernet": {
+            "interface": "en*", // (Optional) To force the use of this interface
+            "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+            "format-ethernet": "󰈀",
+            "format-linked": "{ifname} (No IP) ",
+            "format-disconnected": "",
+            "format-alt": "󰈀 {ipaddr}"
+        },
+        "network#wifi": {
+            "interface": "wlan*", // (Optional) To force the use of this interface
+            "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n{essid} ({signalStrength}%)",
+            "format-wifi": "󰖩",
+            "format-linked": "󰖩",
+            "format-disconnected": "󰖪",
+            "format-alt": "󰖩{essid} ({signalStrength}%)",
+            // Use format-icons if i can find the right font
+            // "format-icons": []
+        },
+        "network#vpn": {
+            "interface": "vpn*", // (Optional) To force the use of this interface
+            "format-wifi": "{essid} ({signalStrength}%) ",
+            "format-ethernet": "VPN:{ipaddr}",
+            "format-linked": "VPN: none",
+            "format-disconnected": "VPN: none",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "pulseaudio": {
+            "scroll-step": 5, // %, can be a float
+            "format": "{icon}",
+            "tooltip-format": "{desc}\n{icon} {volume}% {format_source}",
+            "format-bluetooth": "{volume}% {icon} ",
+            "format-bluetooth-muted": " {icon}",
+            "format-muted": "",
+            "format-source": " {volume}%",
+            "format-source-muted": "",
+            "format-icons": {
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            },
+            "on-click": "pavucontrol"
+        },
+        "custom/media": {
+            "format": "{icon} {}",
+            "return-type": "json",
+            "max-length": 40,
+            "format-icons": {
+                "spotify": "",
+                "default": "🎜"
+            },
+            "escape": true,
+            "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+                // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        },
+}

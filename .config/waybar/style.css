@@ -6,8 +6,14 @@
     font-size: 16px;
 }
 
+/* Keep this until https://github.com/Alexays/Waybar/issues/1764 is resolved */
+label:disabled,
+button:disabled {
+    color: inherit;
+}
+
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgba(43, 48, 59, 0.9);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
@@ -61,6 +67,7 @@ window#waybar.solo {
 
 #clock,
 #custom-kb,
+#custom-scale,
 #language,
 #battery,
 #cpu,

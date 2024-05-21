@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty -1
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -313,6 +313,3 @@ client.focused_inactive #333333 #43515b #aaaaaa
 
 exec "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK"
 exec "systemctl --user start sway-session.target"
-# Create the illusion of a headless kitty instance by moving a window to the scratchpad
-exec "kitty -1 --class kitty-headless"
-for_window [app_id="kitty-headless"] move to scratchpad

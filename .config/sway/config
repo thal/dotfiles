@@ -295,6 +295,7 @@ exec_always {
     gsettings set $gnome-schema font-antialiasing "rgba"
     gsettings set $gnome-schema text-scaling-factor 1
     gsettings set $gnome-schema cursor-size 24
+    gsettings set overlay-scrolling false
 }
 
 seat seat0 xcursor_theme 'Simp1e' '24'

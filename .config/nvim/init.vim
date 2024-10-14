@@ -4,6 +4,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
 call plug#end()
 
 command W wall
@@ -11,7 +14,7 @@ command W wall
 " Some sensible defaults
 set number
 set clipboard+=unnamedplus
-set mouse=a
+set mouse=niv
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -27,9 +30,12 @@ set listchars+=precedes:<,extends:>
 set completeopt-=preview
 
 colorscheme evening
-highlight NonText guibg=None
-highlight EndOfBuffer guibg=None
-highlight Normal guibg=None
+highlight NonText ctermbg=None guibg=None
+highlight EndOfBuffer ctermbg=None guibg=None
+highlight Normal ctermbg=None guibg=None
+highlight NormalFloat ctermbg=235 guibg=Grey15
+highlight Pmenu ctermbg=235 guibg=Grey15
+highlight link SnippetTabstop Pmenu
 
 " Make the Quickfix window more usable
 " Next result
@@ -88,14 +94,13 @@ noremap <F12> :echo luaeval("require'nvim-treesitter'.statusline()")<CR>
 " Open terminal with ,T
 noremap <leader>T :botright terminal<CR>
 
-" ,, for omnifunc completion
-inoremap <leader>, <c-x><c-o>
 let $EDITOR='nvr -cc split --nostart  --remote-wait +"set bufhidden=delete"'
 
 " Open terminal with ,T
 noremap <leader>T :split<CR><C-w>J10<C-w>_:terminal<CR>
 
-highlight NormalFloat ctermbg=234
+autocmd FileType c,cpp setlocal commentstring=//\ %s
+autocmd BufNewFile,BufRead wscript setlocal ft=python
 
 lua <<EOF
 
@@ -120,3 +125,5 @@ require'nvim-treesitter.configs'.setup {
 
 vim.lsp.set_log_level("off")
 EOF
+
+

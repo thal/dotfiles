@@ -1,12 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'neovim/nvim-lspconfig'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'mfussenegger/nvim-dap'
 call plug#end()
 
 command W wall
@@ -24,11 +21,13 @@ set background=dark
 set ignorecase
 set smartcase
 set list
-set nowrap
+set wrap
+set lbr
 set sidescroll=5
 set listchars+=precedes:<,extends:>
-set completeopt-=preview
 
+"colorscheme vim
+"set notermguicolors
 colorscheme evening
 highlight NonText ctermbg=None guibg=None
 highlight EndOfBuffer ctermbg=None guibg=None
@@ -104,12 +103,12 @@ autocmd BufNewFile,BufRead wscript setlocal ft=python
 
 lua <<EOF
 
-local lspconfiginit = require('lspconfig-init')
+local lspsetup = require('lspsetup')
+local dapinit = require('dap-init')
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    --disable = { "c","cpp" },
     disable = {},
     custom_captures = {
       -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
